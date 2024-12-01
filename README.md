@@ -42,7 +42,6 @@ wikitext-tokenizer/
 - `tokenizer/basic.py`: Implements a minimal Byte Pair Encoding (BPE) tokenizer (`BasicTokenizer`) without regex splitting or special tokens. It extends the base `Tokenizer` class from `base.py`.
 - `tokenizer/regex.py`: Extends the basic BPE tokenizer to handle regular expression-based token splitting patterns and special tokens (`RegexTokenizer`). It extends the `Tokenizer` class from `base.py`.
 - `tokenizer/gpt4.py`: Implements a GPT-4-like tokenizer (`GPT4Tokenizer`) as a wrapper around the `RegexTokenizer`, using pre-trained merge files and handling special tokens specific to GPT-4. It extends the `RegexTokenizer` class from `regex.py`.
-- 
 
 Note: The `RegexTokenizer` is the core tokenizer used for training, while the `GPT4Tokenizer` is a specialized implementation designed for comparison and testing purposes. It uses pretrained merges from the `cl100k_base` tokenizer, similar to GPT-4's tokenizer.
 
