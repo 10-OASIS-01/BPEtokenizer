@@ -81,7 +81,11 @@ The `train_tokenizer.py` script is used to train the tokenizer. It loads the Wik
 #### Example
 
 ```sh
-python train_tokenizer.py --data-dir "data" --vocab-size 32768 --save-dir "models" --model-name "wikitext_tokenizer"
+python train_tokenizer.py \
+  --data-dir "data" \
+  --vocab-size 32768 \
+  --save-dir "models" \
+  --model-name "wikitext_tokenizer" 
 ```
 
 By training with larger datasets and a larger vocabulary, the tokenizer is likely to more closely approximate the behavior of tokenizers used in models like GPT-4.
