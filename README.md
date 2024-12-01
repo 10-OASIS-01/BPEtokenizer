@@ -5,11 +5,11 @@ This project implements a tokenizer based on the Byte Pair Encoding (BPE) algori
 ## Table of Contents
 
 - [Project Structure](#project-structure)
+- [File Descriptions](#file-descriptions)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Training the Tokenizer](#training-the-tokenizer)
   - [Testing the Tokenizer](#testing-the-tokenizer)
-- [File Descriptions](#file-descriptions)
 - [License](#license)
 
 ## Project Structure
