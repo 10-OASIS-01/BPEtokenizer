@@ -50,7 +50,7 @@ Note: The `RegexTokenizer` is the core tokenizer used for training, while the `G
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/wikitext-tokenizer.git
+    git clone https://github.com/10-OASIS-01/BPEtokenizer.git
     cd wikitext-tokenizer
     ```
 
