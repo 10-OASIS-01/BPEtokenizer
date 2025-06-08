@@ -15,7 +15,7 @@ This project implements a tokenizer based on the Byte Pair Encoding (BPE) algori
 ## Project Structure
 
 ```
-wikitext-tokenizer/
+BPEtokenizer/
 ├── data/
 │   ├── taylorswift.txt         (Source from Taylor Swift wiki for small-scale training and testing)
 │   └── Salesforce___wikitext    (WikiText-2-raw-v1 dataset used for training)
@@ -51,7 +51,7 @@ Note: The `RegexTokenizer` is the core tokenizer used for training, while the `G
 1. Clone the repository:
     ```sh
     git clone https://github.com/10-OASIS-01/BPEtokenizer.git
-    cd wikitext-tokenizer
+    cd BPEtokenizer
     ```
 
 2. Create a virtual environment and activate it:
