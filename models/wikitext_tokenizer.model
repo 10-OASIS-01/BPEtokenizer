@@ -1,4 +1,4 @@
-BPE Tokenizer v1
+BPEtokenizer Tokenizer v1
 '(?i:[sdmt]|ll|ve|re)|[^\r\n\p{L}\p{N}]?+\p{L}+|\p{N}{1,3}| ?[^\s\p{L}\p{N}]++[\r\n]*|\s*[\r\n]|\s+(?!\S)|\s+
 5
 <|endoftext|> 32768
