@@ -1,145 +1,122 @@
 from tokenizer import RegexTokenizer
 
+import sys
+
+LOG_FILE = "inference.log"
+
+def log(msg):
+    with open(LOG_FILE, "a", encoding="utf-8") as f:
+        f.write(str(msg) + "\n")
 
 def load_tokenizer(model_path):
     """Load the trained tokenizer model"""
     tokenizer = RegexTokenizer()
     try:
         tokenizer.load(model_path)
-        print(f"Tokenizer model loaded from {model_path}")
+        log(f"Tokenizer model loaded from {model_path}")
+        print(f"[INFO] Tokenizer model loaded from {model_path}")
     except Exception as e:
-        print(f"Error loading tokenizer model from {model_path}: {e}")
-        exit(1)  # Stop execution if loading fails
+        log(f"Error loading tokenizer model from {model_path}: {e}")
+        print(f"[ERROR] Error loading tokenizer model from {model_path}: {e}")
+        sys.exit(1)  # Stop execution if loading fails
     return tokenizer
-
 
 def encode_decode_consistency(tokenizer, test_strings):
     """Test encode-decode consistency"""
+    print("[INFO] Running encode-decode consistency tests...")
     for text in test_strings:
-        print(f"Testing encode-decode consistency for: {text}")
-
-        # Encode text
+        log(f"Testing encode-decode consistency for: {text}")
         token_ids = tokenizer.encode(text)
-        print(f"Encoded Token IDs: {token_ids}")
-
-        # Decode token IDs
+        log(f"Encoded Token IDs: {token_ids}")
         decoded_text = tokenizer.decode(token_ids)
-        print(f"Decoded Text: {decoded_text}")
-
-        # Check if encoding and decoding results are consistent
+        log(f"Decoded Text: {decoded_text}")
         assert text == decoded_text, f"Encoding and decoding for text '{text}' failed!"
-        print("Encode-Decode Test Passed\n")
-
+        log("Encode-Decode Test Passed\n")
+    print("[INFO] Encode-decode consistency tests finished.")
 
 def special_tokens(tokenizer, special_string):
     """Test special token handling"""
-    print("Testing special tokens handling...")
-
-    # Encode special string
+    print("[INFO] Running special tokens tests...")
+    log("Testing special tokens handling...")
     special_token_ids = tokenizer.encode(special_string, allowed_special="all")
-    print(f"Special Token IDs: {special_token_ids}")
-
-    # Decode special token IDs
+    log(f"Special Token IDs: {special_token_ids}")
     decoded_special_string = tokenizer.decode(special_token_ids)
-    print(f"Decoded Special String: {decoded_special_string}")
-
-    # Check if the encoding and decoding of the special string are consistent
+    log(f"Decoded Special String: {decoded_special_string}")
     assert special_string == decoded_special_string, "Special token handling failed!"
-    print("Special Tokens Test Passed\n")
-
+    log("Special Tokens Test Passed\n")
+    print("[INFO] Special tokens tests finished.")
 
 def multilingual_encode_decode(tokenizer, multilingual_strings):
     """Test multilingual character sets"""
+    print("[INFO] Running multilingual encode-decode tests...")
     for text in multilingual_strings:
-        print(f"Testing multilingual encode-decode consistency for: {text}")
-
-        # Encode text
+        log(f"Testing multilingual encode-decode consistency for: {text}")
         token_ids = tokenizer.encode(text)
-        print(f"Encoded Token IDs: {token_ids}")
-
-        # Decode token IDs
+        log(f"Encoded Token IDs: {token_ids}")
         decoded_text = tokenizer.decode(token_ids)
-        print(f"Decoded Text: {decoded_text}")
-
-        # Check if encoding and decoding results are consistent
+        log(f"Decoded Text: {decoded_text}")
         assert text == decoded_text, f"Encoding and decoding for text '{text}' failed!"
-        print("Multilingual Encode-Decode Test Passed\n")
-
+        log("Multilingual Encode-Decode Test Passed\n")
+    print("[INFO] Multilingual encode-decode tests finished.")
 
 def format_specific_cases(tokenizer, formatted_strings):
     """Test common text formats"""
+    print("[INFO] Running format-specific encode-decode tests...")
     for text in formatted_strings:
-        print(f"Testing format-specific encode-decode consistency for: {text}")
-
-        # Encode text
+        log(f"Testing format-specific encode-decode consistency for: {text}")
         token_ids = tokenizer.encode(text)
-        print(f"Encoded Token IDs: {token_ids}")
-
-        # Decode token IDs
+        log(f"Encoded Token IDs: {token_ids}")
         decoded_text = tokenizer.decode(token_ids)
-        print(f"Decoded Text: {decoded_text}")
-
-        # Check if encoding and decoding results are consistent
+        log(f"Decoded Text: {decoded_text}")
         assert text == decoded_text, f"Encoding and decoding for formatted text '{text}' failed!"
-        print("Format Test Passed\n")
-
+        log("Format Test Passed\n")
+    print("[INFO] Format-specific encode-decode tests finished.")
 
 def repeated_patterns(tokenizer, repeated_strings):
     """Test repeated patterns and whitespace characters"""
+    print("[INFO] Running repeated patterns encode-decode tests...")
     for text in repeated_strings:
-        print(f"Testing repeated and whitespace patterns encode-decode for: {text}")
-
-        # Encode text
+        log(f"Testing repeated and whitespace patterns encode-decode for: {text}")
         token_ids = tokenizer.encode(text)
-        print(f"Encoded Token IDs: {token_ids}")
-
-        # Decode token IDs
+        log(f"Encoded Token IDs: {token_ids}")
         decoded_text = tokenizer.decode(token_ids)
-        print(f"Decoded Text: {decoded_text}")
-
-        # Check if encoding and decoding results are consistent
+        log(f"Decoded Text: {decoded_text}")
         assert text == decoded_text, f"Encoding and decoding for repeated text '{text}' failed!"
-        print("Repeated Pattern Test Passed\n")
-
+        log("Repeated Pattern Test Passed\n")
+    print("[INFO] Repeated patterns encode-decode tests finished.")
 
 def long_text_handling(tokenizer, long_text):
     """Test long text handling"""
-    print("Testing long text handling...")
-
-    # Encode long text
+    print("[INFO] Running long text handling test...")
+    log("Testing long text handling...")
     long_token_ids = tokenizer.encode(long_text)
-    print(f"Encoded Long Text Token IDs: {long_token_ids[:20]}...")  # Print the first 20 token IDs
-
-    # Decode long text
+    log(f"Encoded Long Text Token IDs: {long_token_ids[:20]}...")  # Print the first 20 token IDs
     decoded_long_text = tokenizer.decode(long_token_ids)
-    print(f"Decoded Long Text (First 500 characters): {decoded_long_text[:500]}...")  # Print the first 500 characters
-
-    # Check if the encoding and decoding of the long text are consistent
+    log(f"Decoded Long Text (First 500 characters): {decoded_long_text[:500]}...")  # Print the first 500 characters
     assert long_text == decoded_long_text, "Long text encoding and decoding failed!"
-    print("Long Text Test Passed\n")
-
+    log("Long Text Test Passed\n")
+    print("[INFO] Long text handling test finished.")
 
 def code_text_handling(tokenizer, code_texts):
     """Test code text handling"""
-    print("Testing code text handling...")
-
+    print("[INFO] Running code text handling tests...")
+    log("Testing code text handling...")
     for text in code_texts:
-        print(f"Testing code text encode-decode consistency for:\n{text}\n")
-
-        # Encode code text
+        log(f"Testing code text encode-decode consistency for:\n{text}\n")
         token_ids = tokenizer.encode(text)
-        print(f"Encoded Code Token IDs: {token_ids[:20]}...")  # Print the first 20 token IDs
-
-        # Decode code text
+        log(f"Encoded Code Token IDs: {token_ids[:20]}...")  # Print the first 20 token IDs
         decoded_text = tokenizer.decode(token_ids)
-        print(f"Decoded Code Text (First 500 characters): \n{decoded_text[:500]}...")  # Print the first 500 characters
-
-        # Check if the encoding and decoding of the code text are consistent
+        log(f"Decoded Code Text (First 500 characters): \n{decoded_text[:500]}...")  # Print the first 500 characters
         assert text == decoded_text, f"Code text encoding and decoding failed for:\n{text}"
-        print("Code Text Test Passed\n")
-
+        log("Code Text Test Passed\n")
+    print("[INFO] Code text handling tests finished.")
 
 def main():
+    print("[INFO] Inference script started.")
+    # Clear log file at the start
+    with open(LOG_FILE, "w", encoding="utf-8") as f:
+        f.write("")
+
     # Load the tokenizer model
     model_path = "models/wikitext_tokenizer.model"
     tokenizer = load_tokenizer(model_path)
@@ -236,27 +213,28 @@ int main() {
     long_text = "This is a very long document. " * 1000  # Generate a very long text
 
     # Perform all tests
-    print("\n--- Testing encode-decode consistency ---")
+    log("\n--- Testing encode-decode consistency ---")
     encode_decode_consistency(tokenizer, test_strings)
 
-    print("\n--- Testing special tokens handling ---")
+    log("\n--- Testing special tokens handling ---")
     special_tokens(tokenizer, special_string)
 
-    print("\n--- Testing multilingual encode-decode consistency ---")
+    log("\n--- Testing multilingual encode-decode consistency ---")
     multilingual_encode_decode(tokenizer, multilingual_strings)
 
-    print("\n--- Testing format-specific encode-decode consistency ---")
+    log("\n--- Testing format-specific encode-decode consistency ---")
     format_specific_cases(tokenizer, formatted_strings)
 
-    print("\n--- Testing repeated patterns encode-decode ---")
+    log("\n--- Testing repeated patterns encode-decode ---")
     repeated_patterns(tokenizer, repeated_strings)
 
-    print("\n--- Testing long text handling ---")
+    log("\n--- Testing long text handling ---")
     long_text_handling(tokenizer, long_text)
 
-    print("\n--- Testing code text handling ---")
+    log("\n--- Testing code text handling ---")
     code_text_handling(tokenizer, code_texts)
 
+    print("[INFO] All inference tests finished. See inference.log for details.")
 
 if __name__ == "__main__":
     main()
